@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:57:14 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/10 10:03:12 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/10 16:37:04 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_time_to_die(t_philo *philos);
 void	lock_unlock_printf(t_philo *phl, char *str);
 void	lock_printf(t_philo *phl, char *str);
 void	ft_unlock_destroy_mutexes(t_philo *philos);
-void	create_threads(t_philo *philos, t_args *args);
+int		create_threads(t_philo *philos, t_args *args);
 // void	check_nbr_meals(t_philo **philos);
 
 #endif

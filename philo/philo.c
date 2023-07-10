@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:57:09 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/10 11:51:27 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/10 16:39:59 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	fill_in_args(int ac, char **av, t_args *args)
 	args->time_to_sleep = ft_atoi(av[4]);
 	args->min_must_eat = -1;
 	args->start_time = ft_gettime();
-	printf("first init time%ld\n", args->start_time);
 	if (ac == 6)
 		args->min_must_eat = ft_atoi(av[5]);
 	if (args->nbr_of_philo >= 200 || args->time_to_die <= 60
@@ -83,7 +82,7 @@ void	*start_routine(void *philo)
 		pthread_mutex_lock(&phl->mutex_last_meal);
 		phl->last_meal = ft_gettime();
 		pthread_mutex_unlock(&phl->mutex_last_meal);
-		pthread_mutex_lock(&phl->mutex_last_meal);
+		pthread_mutex_lock(&phl->mutex_nbr_meals);
 		phl->nbr_meals++;
 		pthread_mutex_unlock(&phl->mutex_nbr_meals);
 		lock_unlock_printf(phl, "is eating");
@@ -111,18 +110,22 @@ t_philo	*create_philos(t_args *args)
 	return (philos);
 }
 
-void	create_threads(t_philo *philos, t_args *args)
+int	create_threads(t_philo *philos, t_args *args)
 {
-	int		i;
+	int	i;
+	int	j;
 
 	i = 1;
 	while (i <= args->nbr_of_philo)
 	{
-		pthread_create(&philos->pid, NULL, &start_routine, philos);
-		pthread_detach(philos->pid);
+		if (pthread_create(&philos->pid, NULL, &start_routine, philos) != 0)
+			return (-1);
+		if (pthread_detach(philos->pid) != 0)
+			return (-1);
 		philos = philos->next;
 		i++;
 	}
+	return (0);
 }
 
 void	check_time_to_die(t_philo *philos)
@@ -137,12 +140,11 @@ void	check_time_to_die(t_philo *philos)
 	tm = philos->args.time_to_die;
 	while (1)
 	{
+		usleep(100);
 		pthread_mutex_lock(&philos->mutex_last_meal);
 		t = philos->last_meal;
-		printf("init time%ld\n", philos->args.start_time);
 		if ((ft_gettime() - t) > tm)
 		{
-			printf("dgdfg %ld", ft_gettime() - t);
 			lock_printf(philos, "died");
 			return ;
 		}
@@ -186,7 +188,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	philos = create_philos(&args);
-	create_threads(philos, &args);
+	if (create_threads(philos, &args) == -1)
+		return (1);
 	check_time_to_die(philos);
 	ft_unlock_destroy_mutexes(philos);
 	ft_lstclear(&philos);
