@@ -4,7 +4,7 @@ SRC := $(shell find . -name "*.c")
 
 OBJ := $(SRC:%.c=%.o)
 
-FLAGS := -Wall -Wextra -Werror -pthread #-fsanitize=thread -g
+FLAGS := -Wall -Wextra -Werror -pthread
 
 %.o : %.c philo.h
 	cc $(FLAGS) -c $<
