@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 17:57:14 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/10 21:36:17 by isidki           ###   ########.fr       */
+/*   Created: 2023/07/09 16:02:30 by isidki            #+#    #+#             */
+/*   Updated: 2023/07/11 16:51:26 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct n_args
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				min_must_eat;
+	int				count;
 	time_t			start_time;
 	pthread_mutex_t	lock_print;
 }	t_args;
@@ -65,6 +66,6 @@ void	lock_printf(t_philo *phl, char *str);
 void	ft_unlock_destroy_mutexes(t_philo *philos);
 int		check_death(t_philo *philos);
 int		create_threads(t_philo *philos, t_args *args);
-void	mini_start_routine(t_philo *phl);
+void	mini_start_routine(t_philo *phl, int i);
 
 #endif
