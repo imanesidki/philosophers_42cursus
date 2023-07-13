@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:57:09 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/13 16:29:43 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/13 18:10:51 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	mini_start_routine(t_philo *phl, int i)
 	pthread_mutex_unlock(&phl->mutex_last_meal);
 	pthread_mutex_lock(&phl->mutex_nbr_meals);
 	phl->nbr_meals++;
-	if (phl->nbr_meals >= i && i != -1)
-		phl->args.count++;
+	if (phl->nbr_meals == i && i != -1)
+		phl->args->count++;
 	pthread_mutex_unlock(&phl->mutex_nbr_meals);
 	lock_unlock_printf(phl, "is eating");
-	ft_usleep(phl->args.time_to_eat);
+	ft_usleep(phl->args->time_to_eat);
 	pthread_mutex_unlock(&phl->fork);
 	pthread_mutex_unlock(&phl->next->fork);
 }
@@ -44,9 +44,9 @@ void	*start_routine(void *philo)
 		usleep(100);
 	while (1)
 	{
-		mini_start_routine(phl, phl->args.min_must_eat);
+		mini_start_routine(phl, phl->args->min_must_eat);
 		lock_unlock_printf(phl, "is sleeping");
-		ft_usleep(phl->args.time_to_sleep);
+		ft_usleep(phl->args->time_to_sleep);
 		lock_unlock_printf(phl, "is thinking");
 	}
 }

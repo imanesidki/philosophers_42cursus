@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:02:30 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/11 16:51:26 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:46:27 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct n_philo
 {
 	int				id;
 	pthread_t		pid;
-	t_args			args;
+	t_args			*args;
 	int				nbr_meals;
 	time_t			last_meal;
 	pthread_mutex_t	mutex_nbr_meals;
@@ -57,7 +57,7 @@ time_t	ft_gettime(void);
 t_philo	*create_philos(t_args *args);
 void	ft_lstadd_back(t_philo **lst, t_philo *new);
 t_philo	*ft_lstnew(t_args *args, int id);
-void	ft_lstclear(t_philo **lst);
+void	ft_lstclear(t_philo **lst, t_args *args);
 void	*start_routine(void *args);
 void	ft_usleep(time_t t);
 void	check_time_to_die(t_philo *philos);
