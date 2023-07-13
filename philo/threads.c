@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:57:09 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/11 16:39:11 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/13 16:29:43 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	mini_start_routine(t_philo *phl, int i)
 	pthread_mutex_unlock(&phl->mutex_last_meal);
 	pthread_mutex_lock(&phl->mutex_nbr_meals);
 	phl->nbr_meals++;
-	if (phl->nbr_meals >= i)
+	if (phl->nbr_meals >= i && i != -1)
 		phl->args.count++;
 	pthread_mutex_unlock(&phl->mutex_nbr_meals);
 	lock_unlock_printf(phl, "is eating");
