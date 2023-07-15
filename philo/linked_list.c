@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:02:45 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/13 17:59:32 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/15 20:57:20 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_lstclear(t_philo **lst, t_args *args)
 	t_philo	*parcour;
 	t_philo	*l;
 
-	if (!lst)
+	if (!lst || !*lst)
 		return ;
 	free(args);
 	parcour = *lst;
@@ -62,7 +62,5 @@ void	ft_lstclear(t_philo **lst, t_args *args)
 		l = parcour;
 		parcour = parcour->next;
 		free (l);
-		l = NULL;
 	}
-	*lst = NULL;
 }

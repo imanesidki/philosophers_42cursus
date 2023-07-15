@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:40:06 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/13 17:34:25 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/15 22:25:56 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ int	check_death(t_philo *philos)
 	tm = philos->args->time_to_die;
 	pthread_mutex_lock(&philos->mutex_last_meal);
 	t = philos->last_meal;
+	pthread_mutex_lock(&philos->args->mutex_stop);
 	if ((ft_gettime() - t) > tm)
 	{
+		philos->args->stop = 0;
 		lock_printf(philos, "died");
 		return (1);
 	}
+	pthread_mutex_unlock(&philos->args->mutex_stop);
 	pthread_mutex_unlock(&philos->mutex_last_meal);
 	return (0);
 }

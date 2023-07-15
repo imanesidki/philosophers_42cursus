@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 16:02:30 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/13 17:46:27 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/15 22:38:55 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ typedef struct n_args
 	int				time_to_sleep;
 	int				min_must_eat;
 	int				count;
+	int				stop;
 	time_t			start_time;
 	pthread_mutex_t	lock_print;
+	pthread_mutex_t	mutex_stop;
 }	t_args;
 
 typedef struct n_philo
@@ -60,6 +62,7 @@ t_philo	*ft_lstnew(t_args *args, int id);
 void	ft_lstclear(t_philo **lst, t_args *args);
 void	*start_routine(void *args);
 void	ft_usleep(time_t t);
+void	ft_eating(t_philo *phl, int i);
 void	check_time_to_die(t_philo *philos);
 void	lock_unlock_printf(t_philo *phl, char *str);
 void	lock_printf(t_philo *phl, char *str);

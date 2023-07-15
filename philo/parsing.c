@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 17:57:09 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/13 17:39:27 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/15 21:52:38 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	fill_in_args(int ac, char **av, t_args *args)
 	args->time_to_sleep = ft_atoi(av[4]);
 	args->min_must_eat = -1;
 	args->count = 0;
+	args->stop = 1;
 	args->start_time = ft_gettime();
 	if (ac == 6)
 		args->min_must_eat = ft_atoi(av[5]);
@@ -42,5 +43,6 @@ int	fill_in_args(int ac, char **av, t_args *args)
 		|| args->time_to_eat <= 60 || args->time_to_sleep <= 60)
 		return (-1);
 	pthread_mutex_init(&args->lock_print, NULL);
+	pthread_mutex_init(&args->mutex_stop, NULL);
 	return (0);
 }

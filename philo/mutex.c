@@ -6,7 +6,7 @@
 /*   By: isidki <isidki@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 16:40:06 by isidki            #+#    #+#             */
-/*   Updated: 2023/07/13 17:39:05 by isidki           ###   ########.fr       */
+/*   Updated: 2023/07/15 21:51:20 by isidki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	ft_unlock_destroy_mutexes(t_philo *philos)
 		philos = philos->next;
 	}
 	pthread_mutex_destroy(&philos->args->lock_print);
+	pthread_mutex_destroy(&philos->args->mutex_stop);
 }
