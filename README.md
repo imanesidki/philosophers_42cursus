@@ -1,8 +1,8 @@
 # philosophers_42cursus
 
-The Dining Philosophers problem resolved using threads and mutexes.<br>
+## The Dining Philosophers problem resolved using threads and mutexes.<br>
 
-Overall Description:<br>
+### Overall Description:<br>
 • One or more philosophers sit at a round table.<br>
 • There is a large bowl of spaghetti in the middle of the table.<br>
 • The philosophers alternatively eat, think, or sleep.<br>
