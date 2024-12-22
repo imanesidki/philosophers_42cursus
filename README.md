@@ -1,6 +1,6 @@
-# philosophers_42cursus
+# philosophers
 
-## The Dining Philosophers problem resolved using threads and mutexes.<br>
+## The Dining Philosophers problem resolved using threads and mutexes in C langage.<br>
 
 ### Overall Description:<br>
 • One or more philosophers sit at a round table.<br>
